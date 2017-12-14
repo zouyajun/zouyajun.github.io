@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="心有猛虎，细嗅蔷薇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="objectForKey与valueForKey在NSDictionary中的差异先从 NSDictionary 文档中来看这两个方法的定义  objectForKey returns the value associated with aKey, or nil if no value is associated with aKey. 返回指定 key 的 value，若没有这个 key 返回 n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="objectForKey与valueForKey在NSDictionary中的差异">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/objectForKey与valueForKey在NSDictionary中的差异/index.html">
 <meta property="og:site_name" content="躺在屋顶上的猫">
-<meta property="og:description" content="心有猛虎，细嗅蔷薇">
+<meta property="og:description" content="objectForKey与valueForKey在NSDictionary中的差异先从 NSDictionary 文档中来看这两个方法的定义  objectForKey returns the value associated with aKey, or nil if no value is associated with aKey. 返回指定 key 的 value，若没有这个 key 返回 n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-09T07:49:33.000Z">
+<meta property="og:updated_time" content="2017-12-14T06:14:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="心有猛虎，细嗅蔷薇">
+<meta name="twitter:title" content="objectForKey与valueForKey在NSDictionary中的差异">
+<meta name="twitter:description" content="objectForKey与valueForKey在NSDictionary中的差异先从 NSDictionary 文档中来看这两个方法的定义  objectForKey returns the value associated with aKey, or nil if no value is associated with aKey. 返回指定 key 的 value，若没有这个 key 返回 n">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/objectForKey与valueForKey在NSDictionary中的差异/"/>
 
 
 
 
 
-  <title>about | 躺在屋顶上的猫</title>
+  <title>objectForKey与valueForKey在NSDictionary中的差异 | 躺在屋顶上的猫</title>
   
 
 
@@ -238,33 +238,228 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/objectForKey与valueForKey在NSDictionary中的差异/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="躺在屋顶上的猫">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">objectForKey与valueForKey在NSDictionary中的差异</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T14:13:55+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="objectForKey与valueForKey在NSDictionary中的差异"><a href="#objectForKey与valueForKey在NSDictionary中的差异" class="headerlink" title="objectForKey与valueForKey在NSDictionary中的差异"></a>objectForKey与valueForKey在NSDictionary中的差异</h2><p>先从 NSDictionary 文档中来看这两个方法的定义</p>
+<ul>
+<li>objectForKey<blockquote>
+<p>returns the value associated with aKey, or nil if no value is associated with aKey. 返回指定 key 的 value，若没有这个 key 返回 nil</p>
+</blockquote>
+</li>
+<li>valueForKey<blockquote>
+<p>returns the value associated with a given key. 同样是返回指定 key 的 value</p>
+</blockquote>
+</li>
+</ul>
+<p>直观上看这两个方法好像没有什么区别，但文档里 valueForKey: 有额外一点：</p>
+<p>If key does not start with “@”, invokes objectForKey:. If key does start with “@”, strips the “@” and invokes [super valueForKey:] with the rest of the key. via Discussion</p>
+<p>一般来说 key 可以是任意字符串组合，如果 key 不是以 @ 符号开头，这时候 valueForKey: 等同于 objectForKey:，如果是以 @ 开头，去掉 key 里的 @ 然后用剩下部分作为 key 执行 [super valueForKey:]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@interface Person : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, retain) NSString *name;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">Person *person = [[Person alloc] init];</span><br><span class="line"></span><br><span class="line">person.name = @&quot;fannheyward&quot;;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;name:%@&quot;, [person name]);</span><br><span class="line"></span><br><span class="line">//name:fannheyward</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;name:%@&quot;, [person valueForKey:@&quot;name&quot;]);</span><br><span class="line"></span><br><span class="line">//name:fannheyward</span><br><span class="line"></span><br><span class="line">[person release];</span><br></pre></td></tr></table></figure>
+<p>valueForKey: 取值是找和指定 key 同名的 property accessor，没有的时候执行 valueForUndefinedKey:，而 valueForUndefinedKey: 的默认实现是抛出 NSUndefinedKeyException 异常。</p>
+<p>回过头来看刚才 crash 的例子， [dict valueForKey:@”@theKey”]; 会把 key 里的 @ 去掉，也就变成了 [dict valueForKey:@”theKey”];，而 dict 不存在 theKey 这样的 property，转而执行 [dict valueForUndefinedKey:@”theKey”];，抛出 NSUndefinedKeyException 异常后 crash 掉。</p>
+<p>objectForKey: 和 valueForKey: ==在多数情况下都是一样的结果返回，但是如果 key 是以 @ 开头，valueForKey: 就成了一个大坑，建议在 NSDictionary 下只用 objectForKey: 来取值。==</p>
+
       
     </div>
     
     
     
+
+    <div>
+      
+        
+ <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+          
+            
+          
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="Ryan 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="Ryan 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/通过运行时Runtime给Model类赋值/" rel="next" title="通过运行时Runtime给Model类赋值">
+                <i class="fa fa-chevron-left"></i> 通过运行时Runtime给Model类赋值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
   </div>
 
 
@@ -297,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -394,6 +598,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#objectForKey与valueForKey在NSDictionary中的差异"><span class="nav-number">1.</span> <span class="nav-text"><a href="#objectForKey&#x4E0E;valueForKey&#x5728;NSDictionary&#x4E2D;&#x7684;&#x5DEE;&#x5F02;" class="headerlink" title="objectForKey&#x4E0E;valueForKey&#x5728;NSDictionary&#x4E2D;&#x7684;&#x5DEE;&#x5F02;"></a>objectForKey&#x4E0E;valueForKey&#x5728;NSDictionary&#x4E2D;&#x7684;&#x5DEE;&#x5F02;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
