@@ -90,16 +90,17 @@
 
 
 
-<meta name="description" content="心有猛虎，细嗅蔷薇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="躺在屋顶上的猫">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="实现实体基类中的方法 实体基类中的方法是从各个Model中抽象出来的并且可以重复利用的部分，在实体基类的方法中大致包括：生成getter方法，生成setter方法，获取Model类的属性，把字典的值赋给对应的Model, 动态的调用getter方法对实体类的属性值进行遍历   根据Key值生成set方法 首先要编写的方法是传入一个字符串，然后返回该字符串所对应属性的setter方法。这个方法其实很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过运行时Runtime给Model类赋值">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/通过运行时Runtime给Model类赋值/index.html">
 <meta property="og:site_name" content="躺在屋顶上的猫">
-<meta property="og:description" content="心有猛虎，细嗅蔷薇">
+<meta property="og:description" content="实现实体基类中的方法 实体基类中的方法是从各个Model中抽象出来的并且可以重复利用的部分，在实体基类的方法中大致包括：生成getter方法，生成setter方法，获取Model类的属性，把字典的值赋给对应的Model, 动态的调用getter方法对实体类的属性值进行遍历   根据Key值生成set方法 首先要编写的方法是传入一个字符串，然后返回该字符串所对应属性的setter方法。这个方法其实很">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-14T06:09:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="躺在屋顶上的猫">
-<meta name="twitter:description" content="心有猛虎，细嗅蔷薇">
+<meta name="twitter:title" content="通过运行时Runtime给Model类赋值">
+<meta name="twitter:description" content="实现实体基类中的方法 实体基类中的方法是从各个Model中抽象出来的并且可以重复利用的部分，在实体基类的方法中大致包括：生成getter方法，生成setter方法，获取Model类的属性，把字典的值赋给对应的Model, 动态的调用getter方法对实体类的属性值进行遍历   根据Key值生成set方法 首先要编写的方法是传入一个字符串，然后返回该字符串所对应属性的setter方法。这个方法其实很">
 
 
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/通过运行时Runtime给Model类赋值/"/>
 
 
 
 
 
-  <title>躺在屋顶上的猫</title>
+  <title>通过运行时Runtime给Model类赋值 | 躺在屋顶上的猫</title>
   
 
 
@@ -154,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/zouyajun" class="github-corner" aria-label="View source on Github">
@@ -235,9 +235,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -267,9 +267,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/14/通过运行时Runtime给Model类赋值/" itemprop="url">通过运行时Runtime给Model类赋值</a></h1>
+          <h1 class="post-title" itemprop="name headline">通过运行时Runtime给Model类赋值</h1>
         
 
         <div class="post-meta">
@@ -319,9 +317,7 @@
       
 
       
-        
-          
-            <h3 id="实现实体基类中的方法"><a href="#实现实体基类中的方法" class="headerlink" title="实现实体基类中的方法"></a>实现实体基类中的方法</h3><blockquote>
+        <h3 id="实现实体基类中的方法"><a href="#实现实体基类中的方法" class="headerlink" title="实现实体基类中的方法"></a>实现实体基类中的方法</h3><blockquote>
 <p>实体基类中的方法是从各个Model中抽象出来的并且可以重复利用的部分，在实体基类的方法中大致包括：生成getter方法，生成setter方法，获取Model类的属性，把字典的值赋给对应的Model, 动态的调用getter方法对实体类的属性值进行遍历</p>
 </blockquote>
 <ul>
@@ -380,24 +376,61 @@
 <h3 id="在运行时创建一个类，并为这个类添加成员变量"><a href="#在运行时创建一个类，并为这个类添加成员变量" class="headerlink" title="在运行时创建一个类，并为这个类添加成员变量"></a>在运行时创建一个类，并为这个类添加成员变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 在运行时创建继承自NSObject的子类Person</span><br><span class="line">Class Person = objc_allocateClassPair([NSObject class], &quot;Person&quot;, 0);</span><br><span class="line"></span><br><span class="line">BOOL flag1 = class_addIvar(Person, &quot;_name&quot;, sizeof(NSString *), log2(sizeof(NSString *)), @encode(NSString *));</span><br><span class="line">if (flag1) &#123;</span><br><span class="line">NSLog(@&quot;_name 变量添加成功&quot;);</span><br><span class="line">&#125;</span><br><span class="line">BOOL flag2 = class_addIvar(Person, &quot;_age&quot;, sizeof(int), sizeof(int), @encode(int));</span><br><span class="line">if (flag2) &#123;</span><br><span class="line">NSLog(@&quot;_age 变量添加成功&quot;);</span><br><span class="line">&#125;</span><br><span class="line">// 完成Person类的创建</span><br><span class="line">objc_registerClassPair(Person);</span><br><span class="line"></span><br><span class="line">unsigned int varCount;</span><br><span class="line">Ivar *varList = class_copyIvarList(Person, &amp;varCount);</span><br><span class="line">for (int i = 0; i &lt; varCount; i ++) &#123;</span><br><span class="line">NSLog(@&quot;%s&quot;,ivar_getName(varList[i]));</span><br><span class="line">&#125;</span><br><span class="line">// 释放varList</span><br><span class="line">free(varList);</span><br><span class="line"></span><br><span class="line">// 创建Person对象p1</span><br><span class="line">id p1 = [Person new];</span><br><span class="line">// 从类中获取对象的成员变量</span><br><span class="line">Ivar name = class_getInstanceVariable(Person, &quot;_name&quot;);</span><br><span class="line">Ivar age = class_getInstanceVariable(Person, &quot;_age&quot;);</span><br><span class="line"></span><br><span class="line">// 为类p1 的成员变量赋值</span><br><span class="line">object_setIvar(p1, name, @&quot;张小三&quot;);</span><br><span class="line">object_setIvar(p1, age, @(20));</span><br><span class="line"></span><br><span class="line">// 获取类p1成员变量的值</span><br><span class="line">NSLog(@&quot;name = %@&quot;,object_getIvar(p1, name));</span><br><span class="line">NSLog(@&quot;age = %@&quot;,object_getIvar(p1, age));</span><br></pre></td></tr></table></figure>
 <h3 id="给类添加属性"><a href="#给类添加属性" class="headerlink" title="给类添加属性"></a>给类添加属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//给已经有的Person类添加属性littleName。</span><br><span class="line">objc_property_attribute_t type = &#123; &quot;T&quot;, &quot;@\&quot;NSString\&quot;&quot; &#125;;//属性类型为NSString</span><br><span class="line">objc_property_attribute_t ownership = &#123; &quot;C&quot;, &quot;copy&quot; &#125;; // C = copy</span><br><span class="line">objc_property_attribute_t backingivar  = &#123; &quot;V&quot;, &quot;_littleName&quot; &#125;;//_littleName为Person类的全局变量，这里是让新属性与之关联</span><br><span class="line">objc_property_attribute_t attrs[] = &#123; type, ownership, backingivar &#125;;</span><br><span class="line">class_addProperty([Person class], &quot;littleName&quot;, attrs, 3);</span><br><span class="line">//验证是否添加成功</span><br><span class="line">objc_property_t pt =  class_getProperty([Person class], &quot;littleName&quot;);</span><br><span class="line">NSLog(@&quot;property&apos;s name: %s&quot;, property_getName(pt));</span><br><span class="line">NSLog(@&quot;property&apos;attribute:%s&quot;,property_getAttributes(pt));</span><br><span class="line">NSLog(@&quot;property&apos;release:%s&quot;,property_copyAttributeValue(pt, &quot;C&quot;));</span><br><span class="line">NSLog(@&quot;property&apos;type:%s&quot;,property_copyAttributeValue(pt, &quot;T&quot;));</span><br><span class="line">NSLog(@&quot;property&apos;value:%s&quot;,property_copyAttributeValue(pt, &quot;V&quot;));</span><br><span class="line">//之后我们可以用KVC操作这个属性</span><br></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
         
-      
-    </div>
+ <div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
-    
+</div>
 
-    <div>
       
     </div>
 
     <div>
           
+            
+          
     </div>
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="Ryan 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="Ryan 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -406,164 +439,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/打开了/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="躺在屋顶上的猫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/07/打开了/" itemprop="url">博文第一篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T16:57:57+08:00">
-                2017-12-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjb634zl60002j1fyae7r5egc"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" itemprop="contentUrl"/>
+              <a href="/2017/12/07/打开了/" rel="next" title="博文第一篇">
+                <i class="fa fa-chevron-left"></i> 博文第一篇
               </a>
             
-          
-            
-              <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" rel="gallery_cjb634zl60002j1fyae7r5egc"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
+          </div>
 
-          
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
           </div>
         </div>
       
 
       
-        
-          
-            <p>你好，欢迎来到我的个人技术博客。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -573,146 +470,37 @@
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="躺在屋顶上的猫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/07/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T15:01:41+08:00">
-                2017-12-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -720,6 +508,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -740,8 +532,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -837,6 +638,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现实体基类中的方法"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5B9E;&#x73B0;&#x5B9E;&#x4F53;&#x57FA;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5B9E;&#x73B0;&#x5B9E;&#x4F53;&#x57FA;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;"></a>&#x5B9E;&#x73B0;&#x5B9E;&#x4F53;&#x57FA;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取Model的实体属性"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;Model&#x7684;&#x5B9E;&#x4F53;&#x5C5E;&#x6027;" class="headerlink" title="&#x83B7;&#x53D6;Model&#x7684;&#x5B9E;&#x4F53;&#x5C5E;&#x6027;"></a>&#x83B7;&#x53D6;Model&#x7684;&#x5B9E;&#x4F53;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getter方法的执行"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Getter&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;" class="headerlink" title="Getter&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;"></a>Getter&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionary的Key与Model的属性不同的处理方式"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Dictionary&#x7684;Key&#x4E0E;Model&#x7684;&#x5C5E;&#x6027;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;" class="headerlink" title="Dictionary&#x7684;Key&#x4E0E;Model&#x7684;&#x5C5E;&#x6027;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;"></a>Dictionary&#x7684;Key&#x4E0E;Model&#x7684;&#x5C5E;&#x6027;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取Model类属性名称和属性名称对应的类型"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;Model&#x7C7B;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x548C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;" class="headerlink" title="&#x83B7;&#x53D6;Model&#x7C7B;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x548C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;"></a>&#x83B7;&#x53D6;Model&#x7C7B;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x548C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取当前类以及子类的映射字典"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x6620;&#x5C04;&#x5B57;&#x5178;" class="headerlink" title="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x6620;&#x5C04;&#x5B57;&#x5178;"></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x6620;&#x5C04;&#x5B57;&#x5178;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取model类以及子类的属性名称"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;model&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;" class="headerlink" title="&#x83B7;&#x53D6;model&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;"></a>&#x83B7;&#x53D6;model&#x7C7B;&#x4EE5;&#x53CA;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取子类的属性名称"><span class="nav-number">7.1.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;" class="headerlink" title="&#x83B7;&#x53D6;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;"></a>&#x83B7;&#x53D6;&#x5B50;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x79F0;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在运行时创建一个类，并为这个类添加成员变量"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5E76;&#x4E3A;&#x8FD9;&#x4E2A;&#x7C7B;&#x6DFB;&#x52A0;&#x6210;&#x5458;&#x53D8;&#x91CF;" class="headerlink" title="&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5E76;&#x4E3A;&#x8FD9;&#x4E2A;&#x7C7B;&#x6DFB;&#x52A0;&#x6210;&#x5458;&#x53D8;&#x91CF;"></a>&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5E76;&#x4E3A;&#x8FD9;&#x4E2A;&#x7C7B;&#x6DFB;&#x52A0;&#x6210;&#x5458;&#x53D8;&#x91CF;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给类添加属性"><span class="nav-number">9.</span> <span class="nav-text"><a href="#&#x7ED9;&#x7C7B;&#x6DFB;&#x52A0;&#x5C5E;&#x6027;" class="headerlink" title="&#x7ED9;&#x7C7B;&#x6DFB;&#x52A0;&#x5C5E;&#x6027;"></a>&#x7ED9;&#x7C7B;&#x6DFB;&#x52A0;&#x5C5E;&#x6027;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -991,6 +808,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
